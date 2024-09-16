@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - ben
+      
     paths:
       - '**/*'
 
@@ -26,34 +27,6 @@ jobs:
           npm install
           npm run build
 
-  build-Web:
-    needs: build-Core
-    if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Web' && needs.build-core.outputs.core_build_status == 'success' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Web repository
-        uses: actions/checkout@v2
-        with:
-          repository: EZPZ-OS/EZPZOS.Web
-          ref: main
 
-      - name: Install and build Web
-        run: |
-          npm install
-          npm run build
 
-  build-Express:
-    needs: build-Core
-    if: ${{ github.repository == 'EZPZ-OS/EZPZOS.Express' && needs.build-core.outputs.core_build_status == 'success' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Express repository
-        uses: actions/checkout@v2
-        with:
-          repository: EZPZ-OS/EZPZOS.Express
-          ref: main
-
-      - name: Install and build Express
-        run: |
-          npm install
-          npm run build
+ 
